@@ -6,8 +6,7 @@ variables:
 
 jobs:
   - job: Build
-    pool:
-      name: RLI VSTS Agent Pool
+
     steps:
 
       - task: xdttransform@3
