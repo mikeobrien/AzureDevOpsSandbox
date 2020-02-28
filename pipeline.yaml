@@ -1,4 +1,4 @@
-variables:
+variables: 
 
   VersionMajorMinor: '1.1'
   VersionBuild: $[counter(variables.VersionMajorMinor, 0)]
