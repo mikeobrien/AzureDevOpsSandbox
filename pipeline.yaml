@@ -34,5 +34,5 @@ jobs:
         inputs:
           targetType: inline
           script: |
-            Write-Host (Get-Content -Path AssemblyInfo.cs)
-            Write-Host (Get-Content -Path Web.config)
+            Write-Host (Get-Content -Path AssemblyInfo.cs | Out-String)
+            Write-Host (Get-Content -Path Web.config | Out-String)
