@@ -1,0 +1,34 @@
+variables:
+
+  VersionMajorMinor: '1.1'
+  VersionBuild: $[counter(variables.VersionMajorMinor, 0)]
+  VersionAssembly: '$(VersionMajorMinor).0.$(VersionBuild)'
+
+jobs:
+  - job: Build
+    pool:
+      name: RLI VSTS Agent Pool
+    steps:
+
+      - task: xdttransform@3
+        inputs:
+          workingFolder: $(Build.SourcesDirectory)
+          transforms: Web.QA.config => Web.config
+
+      - task: Assembly-Info-NetFramework@2
+       inputs:
+         Path: '$(Build.SourcesDirectory)'
+         FileNames: 'AssemblyInfo.cs'
+         InsertAttributes: true
+         Company: 'Fark Corp.'
+         Copyright: 'Copyright © $(date:YYYY) Fark Corp.'
+         VersionNumber: '$(VersionAssembly)'
+         FileVersionNumber: '$(VersionAssembly)'
+         InformationalVersion: '$(VersionAssembly)'
+         LogLevel: 'verbose'
+         FailOnWarning: false
+
+      - task: PublishBuildArtifacts@1
+        inputs:
+          pathtoPublish: '$(Build.SourcesDirectory)'
+          artifactName: results
