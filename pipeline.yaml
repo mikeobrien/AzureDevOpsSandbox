@@ -16,17 +16,17 @@ jobs:
           transforms: Web.QA.config => Web.config
 
       - task: Assembly-Info-NetFramework@2
-       inputs:
-         Path: '$(Build.SourcesDirectory)'
-         FileNames: 'AssemblyInfo.cs'
-         InsertAttributes: true
-         Company: 'Fark Corp.'
-         Copyright: 'Copyright © $(date:YYYY) Fark Corp.'
-         VersionNumber: '$(VersionAssembly)'
-         FileVersionNumber: '$(VersionAssembly)'
-         InformationalVersion: '$(VersionAssembly)'
-         LogLevel: 'verbose'
-         FailOnWarning: false
+        inputs:
+          Path: '$(Build.SourcesDirectory)'
+          FileNames: 'AssemblyInfo.cs'
+          InsertAttributes: true
+          Company: 'Fark Corp.'
+          Copyright: 'Copyright © $(date:YYYY) Fark Corp.'
+          VersionNumber: '$(VersionAssembly)'
+          FileVersionNumber: '$(VersionAssembly)'
+          InformationalVersion: '$(VersionAssembly)'
+          LogLevel: 'verbose'
+          FailOnWarning: false
 
       - task: PublishBuildArtifacts@1
         inputs:
