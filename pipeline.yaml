@@ -17,18 +17,28 @@ jobs:
           workingFolder: $(Build.SourcesDirectory)
           transforms: Web.QA.config => Web.config
 
-      - task: Assembly-Info-NetFramework@2
+      # - task: Assembly-Info-NetFramework@2
+      #   inputs:
+      #     Path: '$(Build.SourcesDirectory)'
+      #     FileNames: 'AssemblyInfo.cs'
+      #     InsertAttributes: true
+      #     Company: 'Fark Corp.'
+      #     Copyright: 'Copyright © $(date:YYYY) Fark Corp.'
+      #     VersionNumber: '$(VersionAssembly)'
+      #     FileVersionNumber: '$(VersionAssembly)'
+      #     InformationalVersion: '$(VersionAssembly)'
+      #     LogLevel: 'verbose'
+      #     FailOnWarning: false
+
+      - task: Update AssemblyInfo@1
         inputs:
-          Path: '$(Build.SourcesDirectory)'
-          FileNames: 'AssemblyInfo.cs'
-          InsertAttributes: true
-          Company: 'Fark Corp.'
-          Copyright: 'Copyright © $(date:YYYY) Fark Corp.'
-          VersionNumber: '$(VersionAssembly)'
-          FileVersionNumber: '$(VersionAssembly)'
-          InformationalVersion: '$(VersionAssembly)'
-          LogLevel: 'verbose'
-          FailOnWarning: false
+          rootFolder: '$(Build.SourcesDirectory)'
+          filePattern: 'AssemblyInfo.cs'
+          assemblyCopyright: 'Copyright © $(date:YYYY) Fark Corp.'
+          assemblyCompany: 'Fark Corp.'
+          assemblyVersion: '$(VersionAssembly)'
+          assemblyFileVersion: '$(VersionAssembly)'
+          assemblyInformationalVersion: '$(VersionAssembly)'
 
       - task: PowerShell@2
         inputs:
